@@ -1,0 +1,64 @@
+#Home-Problem #1
+
+import pandas as pd
+
+# Read the CSV file into a DataFrame
+df = pd.read_csv('https://raw.githubusercontent.com/selva86/datasets/master/Cars93_miss.csv')
+
+# Select every 20th row starting from the 1st row (index 0), and filter columns 'Manufacturer', 'Model', and 'Type'
+filtered_df = df.iloc[::20, :].loc[:, ['Manufacturer', 'Model', 'Type']]
+
+print(filtered_df)
+
+
+#Home-Problem #2
+
+import pandas as pd
+
+# Read the CSV file into a DataFrame
+df = pd.read_csv('https://raw.githubusercontent.com/selva86/datasets/master/Cars93_miss.csv')
+
+# Calculate the mean for 'Min.Price' and 'Max.Price' columns
+min_price_mean = df['Min.Price'].mean()
+max_price_mean = df['Max.Price'].mean()
+
+# Replace missing values with their respective means
+df['Min.Price'].fillna(min_price_mean, inplace=True)
+df['Max.Price'].fillna(max_price_mean, inplace=True)
+
+print(df[['Min.Price', 'Max.Price']].head())  # Print first few rows to verify
+
+
+#Home-Probem #3
+
+import pandas as pd
+import numpy as np
+
+# Create a DataFrame
+df = pd.DataFrame(np.random.randint(10, 40, 60).reshape(-1, 4))
+
+# Filter rows with row sum greater than 100
+rows_sum_gt_100 = df[df.sum(axis=1) > 100]
+
+print(rows_sum_gt_100)
+
+
+#Home-Problem #4
+
+import numpy as np
+
+# Create a 4x4 NumPy array filled with random integers between 1 and 100
+arr = np.random.randint(1, 101, (4, 4))
+
+# Reshape the array into two separate 2D arrays, one representing rows and the other representing columns
+row_array = arr.reshape(2, -1)
+column_array = arr.T.reshape(2, -1)
+
+# Define a function using lambda to calculate the sum of each row and each column separately
+sum_row_column = lambda array: np.array([np.sum(array, axis=1), np.sum(array, axis=0)])
+
+# Calculate the sum of each row and each column separately using the defined lambda function
+row_sums, column_sums = sum_row_column(row_array), sum_row_column(column_array)
+
+print("Row Sums:", row_sums)
+print("Column Sums:", column_sums)
